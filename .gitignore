@@ -47,4 +47,5 @@ yarn.lock
 package-lock.json/
 
 // eslint-disable-next-line 
-package.json
+package-lock.json/
+
