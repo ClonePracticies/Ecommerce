@@ -16,10 +16,11 @@ const App = () => {
     fetchProducts();
   }, []); 
   /* the array here means that it's just going to run at first and it is similar to component did mount  */
- console.log(products);  
+ 
 
 
   return (
+    
     <div>
       <Navbar />
       <Products product={products}/>
