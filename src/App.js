@@ -8,7 +8,6 @@ const App = () => {
   const [products, setProducts]  = useState([]);
 
   const fetchProducts = async () => {
-    /* like .then .catch  we want to catch sth which gets from this api Commerce and this is a promise we have to await to see what is inside that promise and the response is that data ( our product)  */
     const {data} = await commerce.products.list();
 
     setProducts(data);
