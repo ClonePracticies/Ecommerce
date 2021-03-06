@@ -23,7 +23,7 @@ const App = () => {
     
     <div>
       <Navbar />
-      <Products product={products}/>
+      <Products products={products}/>
     </div>
   )
 }
