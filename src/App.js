@@ -11,12 +11,12 @@ const App = () => {
     const {data} = await commerce.products.list();
 
     setProducts(data);
-  };
+  }
   useEffect(() => {
     fetchProducts();
   }, []); 
   /* the array here means that it's just going to run at first and it is similar to component did mount  */
- /*  console.log(products);  */
+ console.log(products);  
 
 
   return (
