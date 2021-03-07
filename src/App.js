@@ -20,38 +20,56 @@ const App = () => {
   }
 
   const handleAddToCart = async (productId, quantity) => {
-    const item = await commerce.cart.add(productId, quantity);
+    const { cart } = await commerce.cart.add(productId, quantity);
     /* to update our cart */
-    setCart(item.cart);
+    setCart(cart);
   }
+  const handleUpdateCartQty = async (productId, quantity) => {
+    const { cart } = await commerce.cart.update(productId, { quantity });
+    setCart(cart);
+  }
+  const handleRemoveFromCart = async (lineItemId) => {
+  const { cart } = await commerce.cart.remove(lineItemId);
+  setCart(cart);
+}
 
-  useEffect(() => {
-    fetchProducts();
-    fetchCart();
-  }, []);
-  /* the array here means that it's just going to run at first and it is similar to component did mount  */
+const handleEmptyCart = async () => {
+  const { cart } = await commerce.cart.empty();
+  setCart(cart);
+}
 
-  console.log(cart);
+useEffect(() => {
+  fetchProducts();
+  fetchCart();
+}, []);
+/* the array here means that it's just going to run at first and it is similar to component did mount  */
 
-  return (
-    < Router>
-      <div>
-        <Navbar totalItems={cart.total_items} />
-        <Switch>
-          <Route exact path="/" >
-            <Products products={products} onAddToCart={handleAddToCart} />
-          </Route>
-          <Route exact path="/cart">
-            <Cart cart={cart} />
-          </Route>
+console.log(cart);
+
+return (
+  < Router>
+    <div>
+      <Navbar totalItems={cart.total_items} />
+      <Switch>
+        <Route exact path="/" >
+          <Products products={products} onAddToCart={handleAddToCart} />
+        </Route>
+        <Route exact path="/cart">
+          <Cart cart={cart}
+
+            handleUpdateCartQty={handleUpdateCartQty}
+            handleRemoveFromCart={handleRemoveFromCart}
+            handleEmptyCart={handleEmptyCart}
+          />
+        </Route>
 
 
 
-        </Switch>
+      </Switch>
 
-      </div>
-    </Router>
+    </div>
+  </Router>
 
-  )
+)
 }
 export default App;
