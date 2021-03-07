@@ -14,10 +14,10 @@ const Product = ({ product , onAddToCart }) => {
       <CardMedia className={classes.media} image={product.media.source} title={product.name} />
       <CardContent>
         <div className={classes.cardContent}>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h6" component="h4">
             {product.name}
           </Typography>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h6" component="h4">
             ${product.price.formatted}
           </Typography>
         </div>

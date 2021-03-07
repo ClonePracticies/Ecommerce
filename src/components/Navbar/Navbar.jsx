@@ -14,12 +14,18 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { ShoppingCart} from '@material-ui/icons';
+import { ShoppingCart } from '@material-ui/icons';
+import { Link, useLocation } from 'react-router-dom';
+/* useLocation is a hook so we need to declare it as const in export , Also this is sth with we hide the shopping cart if we are in cart already */
 
 import useStyles from './styles';
 
-export default function PrimarySearchAppBar( {totalItems}) {
+export default function PrimarySearchAppBar({ totalItems }) {
   const classes = useStyles();
+  const location = useLocation();
+
+  if(location.pathname === '/');
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -70,7 +76,7 @@ export default function PrimarySearchAppBar( {totalItems}) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      
+
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
@@ -105,7 +111,7 @@ export default function PrimarySearchAppBar( {totalItems}) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography component={Link} to="/" className={classes.title} variant="h6" noWrap>
             E-commerce
           </Typography>
           <div className={classes.search}>
@@ -122,20 +128,20 @@ export default function PrimarySearchAppBar( {totalItems}) {
             />
           </div>
           <div className={classes.grow} />
-          <div className = {classes.button}>
-          <IconButton aria-label="show cart items" color="inherit">
+
+          {/* logic of cart button : show this part only if we are on root with && it will appear only if the first part is true */}
+          {location.pathname === '/' && (
+          <div className={classes.button}>
+           
+              <IconButton component={Link} to="/cart" aria-label="show cart items" color="inherit">
               <Badge badgeContent={totalItems} color="secondary">
                 <ShoppingCart />
               </Badge>
             </IconButton>
-
-          </div>
+             
+          </div>)} 
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <MailIcon />
-              </Badge>
-            </IconButton>
+
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
